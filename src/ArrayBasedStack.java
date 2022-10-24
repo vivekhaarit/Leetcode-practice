@@ -90,5 +90,6 @@ class ArrayBasedStack_Driver{
             }
         }while(keep_playing);
         System.out.println("You're now out of the Stack");
+        System.out.println("test");
     }
 }
