@@ -1,60 +1,43 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ArrayBasedStack {
-    private static int[] stack;
-    private static int top;
-    private static int capacity;
+public class ArrayBasedStack<T> {
+    private ArrayList<T> stack;
+    private static int top=-1;
 
     ArrayBasedStack(){
-        top=-1;
-        stack = new int[10];
-        capacity = stack.length;
+        stack = new ArrayList<>();
     }
 
-    public boolean contains(int element) {
-        for(int i=top;i>=0;i--){
-            if(stack[i]==element) return true;
-        }
-        return false;
+    public boolean contains(T element) {
+        if(top==-1) System.out.println("stack is empty");
+        return stack.contains(element);
     }
 
     public int length() {
         return top+1;
     }
 
-    public int peek() {
-        if(top!=-1) {
-            return stack[top];
-        }else {
-            System.out.println("There's no element in the stack.");
-        }
-        return stack[top];
+    public T peek() {
+        if(top==-1) System.out.println("stack is empty");
+        return stack.get(top);
     }
 
-    public int pop() {
-        int result = 0;
-        if(top!=-1) {
-            result = stack[top];
-            stack[top]=0;
-            top--;
+    public T pop() {
+        if(top==-1){
+            System.out.println("stack is empty");
         }
-        else System.out.println("There's no element in the stack");
-        return result;
+       return stack.get(top);
     }
 
-    public void push(int element) {
-        if(top!=capacity-1){
-            top++;
-            stack[top]=element;
-        }else{
-            System.out.println("The stack is full.");
-        }
-
+    public void push(T element) {
+        top++;
+        stack.add(element);
     }
 
     public void traverse() {
-        for(int i=top;i>=0;i--){
-            System.out.print(stack[i]+" ");
+        for(int i=0;i<=top;i++){
+            System.out.print(stack.get(i)+" ");
         }
     }
 }
@@ -71,8 +54,7 @@ class ArrayBasedStack_Driver{
             switch (choice){
                 case 1 :
                     System.out.print("Enter element: ");
-                    int element = scanner.nextInt();
-                    stack.push(element);
+                    stack.push(scanner.next());
                     break;
                 case 2 :
                     System.out.println(stack.pop());
@@ -89,7 +71,6 @@ class ArrayBasedStack_Driver{
                 default: keep_playing = false;
             }
         }while(keep_playing);
-        System.out.println("You're now out of the Stack");
-        System.out.println("yet another test from github");
+
     }
 }
